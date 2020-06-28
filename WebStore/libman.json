@@ -5,6 +5,56 @@
     {
       "library": "bootstrap@4.5.0",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "prettyPhoto@3.1.6",
+      "destination": "wwwroot/lib/prettyPhoto/",
+      "files": [
+        "js/jquery.prettyPhoto.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "animate.css@4.1.0",
+      "destination": "wwwroot/lib/animate.css/",
+      "files": [
+        "animate.min.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "responsive@1.0.5",
+      "destination": "wwwroot/lib/responsive/"
     }
-  ]
+  ,
+{
+  "provider": "cdnjs",
+  "library": "font-awesome@4.0.3",
+  "destination": "wwwroot/lib/font-awesome/"
+}
+,
+{
+  "provider": "cdnjs",
+  "library": "html5shiv@3.7.3",
+  "destination": "wwwroot/lib/html5shiv/"
+}
+,
+{
+  "provider": "cdnjs",
+  "library": "gmaps.js@0.4.25",
+  "destination": "wwwroot/lib/gmaps.js/"
+}
+,
+{
+  "provider": "cdnjs",
+  "library": "scrollup@2.4.1",
+  "destination": "wwwroot/lib/scrollup/"
+}
+]
 }

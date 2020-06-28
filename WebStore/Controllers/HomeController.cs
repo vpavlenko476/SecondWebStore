@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Store.DAL.Contracts;
 using Store.Domain;
+using Store.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,19 +10,21 @@ namespace WebStore.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly List<Employee> employees = new List<Employee>()
+		private readonly IBaseRepo<EmployeeEntity> _employeeRepo;
+		private readonly IMapper _mapper;
+		public HomeController(IBaseRepo<EmployeeEntity> repo, IMapper mapper)
 		{
-			new Employee(){Id=0, FirstName="Name0", SecondName="SecondName0", Patronymic="Patronymic0", Age="22", Email="test0@email.ru", MobilePhone="+7(999)000-00-00"},
-			new Employee(){Id=1, FirstName="Name1", SecondName="SecondName1", Patronymic="Patronymic1", Age="22", Email="test1@email.ru", MobilePhone="+7(999)000-00-01"},
-			new Employee(){Id=2, FirstName="Name2", SecondName="SecondName2", Patronymic="Patronymic2", Age="22", Email="test2@email.ru", MobilePhone="+7(999)000-00-02"}
-		};
+			_employeeRepo = repo;
+			_mapper = mapper;
+		}		
+		
+		public IActionResult Index() => View(_mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
+		public IActionResult Employees() => View(_mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
 
-		public IActionResult Index() => View(employees);
-		public IActionResult Employees() => View(employees);
-
-		public IActionResult EmployeeInfo(int id)
+		public async System.Threading.Tasks.Task<IActionResult> EmployeeInfoAsync(int id)			
 		{
-			return View(employees.Where(e=>e.Id==id).Single());
+			var employee = _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
+			return View(employee);
 		}
 	}
 }

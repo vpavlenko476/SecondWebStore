@@ -4,7 +4,7 @@ using Store.Domain;
 
 namespace Store.DAL.Context
 {
-	class StoreContext: DbContext
+	public class StoreContext: DbContext
 	{
 		public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }
 

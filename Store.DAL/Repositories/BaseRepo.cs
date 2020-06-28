@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Store.DAL.Repositories
 {
-	class BaseRepo<T>: IBaseRepo<T> 
+	public class BaseRepo<T>: IBaseRepo<T> 
 		where T : BaseEntity
 	{
 		private StoreContext _db { get; }

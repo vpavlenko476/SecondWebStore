@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Store.DAL.Contracts
 {
-	interface IBaseRepo<T>: IDisposable
+	public interface IBaseRepo<T>: IDisposable
 	{
 		Task<int> Add(T item);
 		Task<int> AddRange(IList<T> entites);

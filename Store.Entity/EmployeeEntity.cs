@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Store.Entities
 {
-	class Employee: BaseEntity
+	public class EmployeeEntity: BaseEntity
 	{
 		[StringLength(50)]
 		public string FirstName { get; set; }

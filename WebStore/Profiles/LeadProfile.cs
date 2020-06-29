@@ -9,6 +9,7 @@ namespace WebStore.Profiles
         public LeadProfile()
         {
             CreateMap<EmployeeEntity, Employee>();
+            CreateMap<Employee, EmployeeEntity>();
         }
     }
 }

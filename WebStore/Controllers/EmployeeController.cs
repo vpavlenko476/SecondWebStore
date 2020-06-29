@@ -16,13 +16,31 @@ namespace WebStore.Controllers
 		{
 			_employeeRepo = repo;
 			_mapper = mapper;
-		}		
+		}
 		public IActionResult Index() => View(_mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
 
 		public async Task<IActionResult> Details(int id)
 		{
 			var employee = _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
 			return View(employee);
-		}		
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> EditAsync(int id)
+		{
+			var employee = _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
+			return View(employee);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> EditAsync(Employee employee)
+		{
+			if (ModelState.IsValid)
+			{
+				var editedEmployee = _mapper.Map<EmployeeEntity>(employee);
+				await _employeeRepo.Update(editedEmployee);
+			}
+			return View("Index", _mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
+		}
 	}
 }

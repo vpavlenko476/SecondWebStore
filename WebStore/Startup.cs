@@ -22,7 +22,7 @@ namespace WebStore
 		}
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllersWithViews();
+			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"])); ;
 			services.AddScoped<IBaseRepo<EmployeeEntity>, BaseRepo<EmployeeEntity>>();
 			services.AddAutoMapper(typeof(Startup));

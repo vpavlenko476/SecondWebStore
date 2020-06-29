@@ -18,13 +18,14 @@ namespace WebStore.Controllers
 			_mapper = mapper;
 		}		
 		
-		public IActionResult Index() => View(_mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
-		public IActionResult Employees() => View(_mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
-
-		public async Task<IActionResult> EmployeeInfoAsync(int id)			
-		{
-			var employee = _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
-			return View(employee);
-		}
+		public IActionResult Index() => View();
+		public IActionResult Blogs() => View();
+		public IActionResult Cart() => View();
+		public IActionResult ShopBlog() => View();
+		public IActionResult Checkout() => View();
+		public IActionResult Contacts() => View();
+		public IActionResult Login() => View();
+		public IActionResult ProductDetails() => View();
+		public IActionResult Shop() => View();
 	}
 }

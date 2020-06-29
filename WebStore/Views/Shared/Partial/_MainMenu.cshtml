@@ -4,20 +4,20 @@
         <li class="dropdown">
             <a href="#">Shop<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
-                <li><a href="shop.html">Каталог товаров</a></li>
-                <li><a href="product-details.html">Информация о товаре</a></li>
-                <li><a href="checkout.html">Оформление заказа</a></li>
-                <li><a href="cart.html">Корзина</a></li>                
+                <li><a asp-controller="Home" asp-action="Shop">Каталог товаров</a></li>
+                <li><a asp-controller="Home" asp-action="ProductDetails">Информация о товаре</a></li>
+                <li><a asp-controller="Home" asp-action="Checkout">Оформление заказа</a></li>
+                <li><a asp-controller="Home" asp-action="Cart">Корзина</a></li>                
             </ul>
         </li>
         <li class="dropdown">
             <a href="#">Blog<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
-                <li><a href="blog.html">Список блогово</a></li>
-                <li><a >Блог магазина</a></li>
+                <li><a asp-controller="Home" asp-action="Blogs">Список блогово</a></li>
+                <li><a asp-controller="Home" asp-action="ShopBlog">Блог магазина</a></li>
             </ul>
         </li>        
-        <li><a href="contact-us.html">Контакты</a></li>
+        <li><a asp-controller="Employee" asp-action="Contacts">Контакты</a></li>
         <li><a asp-controller="Employee" asp-action="Index">Сотрудники</a></li>
     </ul>
 </div>

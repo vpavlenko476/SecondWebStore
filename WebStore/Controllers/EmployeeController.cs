@@ -42,5 +42,13 @@ namespace WebStore.Controllers
 			}
 			return View("Index", _mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> DeleteAsync(int id)
+		{
+			var employeeToDelete = await _employeeRepo.GetOne(id);
+			await _employeeRepo.Delete(employeeToDelete);
+			return View("Index", _mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
+		}
 	}
 }

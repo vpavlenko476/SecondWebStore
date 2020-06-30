@@ -1,30 +1,6 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/lib/style.css"/>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-</head>
-<body>
-    <div class="contain">
-        <div class="header">
-            <h1>header</h1>
-        </div>
-        <div class="navigation">
-            <a href="~/Home/Index">Главная страница</a><br />
-            <a href="~/Home/Employees">Список сотрудников</a>
-        </div>
-        <div class="main">
-            @RenderBody()
-        </div>
-    </div>
-    <div class="footer">
-        <h1>footer</h1>
-    </div>
-
-</body>
-</html>
+﻿@{ 
+    Layout = "_LayoutSimple";
+}
+<partial name="Partial/_Header" />
+@RenderBody()
+<partial name="Partial/_Footer" />

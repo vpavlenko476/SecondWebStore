@@ -1,0 +1,14 @@
+﻿@model Employee
+<div class="container">
+    <form class="p-a-1" asp-controller="Employee" asp-action="Edit" method="post">
+        <div asp-validation-summary="All"></div>
+        <h2>Сотрудник @Model.Email</h2>
+        <input class="form-control" placeholder="@Model.FirstName" asp-for=FirstName />
+        <input class="form-control" placeholder="@Model.SecondName" asp-for=SecondName />
+        <input class="form-control" placeholder="@Model.Patronymic" asp-for=Patronymic />
+        <input class="form-control" placeholder="@Model.Email" asp-for=Email />
+        <input class="form-control" placeholder="@Model.MobilePhone" asp-for=MobilePhone />
+        <input class="form-control" placeholder="@Model.Age" asp-for=Age />
+        <input class="btn btn-primary" type="submit" />
+    </form>
+</div>

@@ -36,7 +36,7 @@ namespace Store.Services
 		
 		public Task<int> Add(Employee employee)
 		{
-			throw new System.NotImplementedException();
+			return _employeeRepo.Add(_mapper.Map<EmployeeEntity>(employee));
 		}
 
 		public IEnumerable<Employee> GetAll()

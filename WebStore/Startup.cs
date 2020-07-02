@@ -10,6 +10,7 @@ using Store.DAL.Context;
 using Store.DAL.Contracts;
 using Store.DAL.Repositories;
 using Store.Entities;
+using WebStore.Infrastructure.Middleware;
 
 namespace WebStore
 {
@@ -22,12 +23,18 @@ namespace WebStore
 		}
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllersWithViews().AddRazorRuntimeCompilation();
+			services.AddControllersWithViews(opt =>
+			{
+				//opt.Filters.Add<Filter>(); добавление фильтров				
+				//opt.Conventions.Add() добавление соглашений
+			}
+				).AddRazorRuntimeCompilation();
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"])); ;
 			services.AddScoped<IBaseRepo<EmployeeEntity>, BaseRepo<EmployeeEntity>>();
 			services.AddAutoMapper(typeof(Startup));
 		}
-		
+
+		//настройка конвейера middleware
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -37,12 +44,18 @@ namespace WebStore
 			app.UseStaticFiles();
 			app.UseDefaultFiles();
 			app.UseRouting();
-
+			app.Use(async (context, next) =>
+			{
+				//действие над контекстом до
+				await next();//вызов следйющего middleware
+				//действие над контекстом после
+			});
+			app.UseMiddleware<TestMiddleware>(); //использование кастомного middleware
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllerRoute(
-					name:"default",
-					pattern:"{controller=Home}/{action=Index}/{id?}");				
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
 	}

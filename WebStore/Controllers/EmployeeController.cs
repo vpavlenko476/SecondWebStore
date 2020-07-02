@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Store.Domain;
 using Store.Services.Abstract;
 using System.Threading.Tasks;
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
 	public class EmployeeController : Controller
 	{
-		private readonly IEmployeeService _employeeService;		
-		public EmployeeController(IEmployeeService employeeService)
+		private readonly IEmployeeService _employeeService;
+		private readonly IMapper _mapper;
+		public EmployeeController(IEmployeeService employeeService, IMapper mapper)
 		{
 			_employeeService = employeeService;
+			_mapper = mapper;
 		}
 		public IActionResult Index() => View(_employeeService.GetAll());
 
@@ -20,27 +24,40 @@ namespace WebStore.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> EditAsync(int id)
+		public async Task<IActionResult> EditAsync(int? id)
 		{
-			var employee = await _employeeService.GetById(id);
-			return View(employee);
+			if (id == null) return View(new EmployeeViewModel());
+
+			if (id < 0) return BadRequest();
+
+			var employee = await _employeeService.GetById(id.GetValueOrDefault());
+			if (employee == null) return NotFound();
+			return View(_mapper.Map<EmployeeViewModel>(employee));			
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> EditAsync(Employee employee)
+		public async Task<IActionResult> EditAsync(EmployeeViewModel employeeVM)
 		{
 			if (ModelState.IsValid)
 			{
-				await _employeeService.Edit(employee);
+				await _employeeService.Edit(_mapper.Map<Employee>(employeeVM));
 			}
-			return View("Index", _employeeService.GetAll());
+			return RedirectToAction(nameof(Index));
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> DeleteAsync(int id)
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (id <= 0) return BadRequest();
+			var employee = await _employeeService.GetById(id);			
+			return View(_mapper.Map<EmployeeViewModel>(employee));
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteConfirmedAsync(int id)
 		{
 			await _employeeService.Delete(id);
-			return View("Index", _employeeService.GetAll());
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

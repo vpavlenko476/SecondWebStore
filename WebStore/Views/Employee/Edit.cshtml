@@ -1,14 +1,25 @@
-﻿@model Employee
+﻿@model EmployeeViewModel
 <div class="container">
     <form class="p-a-1" asp-controller="Employee" asp-action="Edit" method="post">
-        <div asp-validation-summary="All"></div>
-        <h2>Сотрудник @Model.Email</h2>
-        <input class="form-control" placeholder="@Model.FirstName" asp-for=FirstName />
-        <input class="form-control" placeholder="@Model.SecondName" asp-for=SecondName />
-        <input class="form-control" placeholder="@Model.Patronymic" asp-for=Patronymic />
-        <input class="form-control" placeholder="@Model.Email" asp-for=Email />
-        <input class="form-control" placeholder="@Model.MobilePhone" asp-for=MobilePhone />
-        <input class="form-control" placeholder="@Model.Age" asp-for=Age />
-        <input class="btn btn-primary" type="submit" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden" />
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input class="form-control" placeholder="@Model.FirstName" asp-for=FirstName />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SecondName" class="control-label"></label>
+            <input class="form-control" placeholder="@Model.SecondName" asp-for=SecondName />
+            <span asp-validation-for="SecondName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Patronymic" class="control-label"></label>
+            <input class="form-control" placeholder="@Model.Patronymic" asp-for=Patronymic />
+            <span asp-validation-for="Patronymic" class="text-danger"></span>
+        </div>        
+        <div>
+            <input class="btn btn-primary" value="Сохрнить" type="submit" />
+        </div>        
     </form>
 </div>

@@ -1,11 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Store.DAL.Contracts;
+﻿using Microsoft.AspNetCore.Mvc;
 using Store.Domain;
-using Store.Entities;
 using Store.Services.Abstract;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebStore.Controllers

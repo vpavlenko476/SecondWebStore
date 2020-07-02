@@ -3,32 +3,31 @@ using Microsoft.AspNetCore.Mvc;
 using Store.DAL.Contracts;
 using Store.Domain;
 using Store.Entities;
+using Store.Services.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebStore.Controllers
 {
 	public class EmployeeController : Controller
 	{
-		private readonly IBaseRepo<EmployeeEntity> _employeeRepo;
-		private readonly IMapper _mapper;
-		public EmployeeController(IBaseRepo<EmployeeEntity> repo, IMapper mapper)
+		private readonly IEmployeeService _employeeService;		
+		public EmployeeController(IEmployeeService employeeService)
 		{
-			_employeeRepo = repo;
-			_mapper = mapper;
+			_employeeService = employeeService;
 		}
-		public IActionResult Index() => View(_mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
+		public IActionResult Index() => View(_employeeService.GetAll());
 
-		public async Task<IActionResult> Details(int id)
-		{
-			var employee = _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
-			return View(employee);
+		public async Task<IActionResult> DetailsAsync(int id)
+		{			
+			return View(await _employeeService.GetById(id));
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> EditAsync(int id)
 		{
-			var employee = _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
+			var employee = await _employeeService.GetById(id);
 			return View(employee);
 		}
 
@@ -37,18 +36,16 @@ namespace WebStore.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var editedEmployee = _mapper.Map<EmployeeEntity>(employee);
-				await _employeeRepo.Update(editedEmployee);
+				await _employeeService.Edit(employee);
 			}
-			return View("Index", _mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
+			return View("Index", _employeeService.GetAll());
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> DeleteAsync(int id)
 		{
-			var employeeToDelete = await _employeeRepo.GetOne(id);
-			await _employeeRepo.Delete(employeeToDelete);
-			return View("Index", _mapper.Map<IList<Employee>>(_employeeRepo.GetAll()));
+			await _employeeService.Delete(id);
+			return View("Index", _employeeService.GetAll());
 		}
 	}
 }

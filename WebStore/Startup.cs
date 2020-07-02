@@ -10,6 +10,8 @@ using Store.DAL.Context;
 using Store.DAL.Contracts;
 using Store.DAL.Repositories;
 using Store.Entities;
+using Store.Services;
+using Store.Services.Abstract;
 using WebStore.Infrastructure.Middleware;
 
 namespace WebStore
@@ -32,6 +34,7 @@ namespace WebStore
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"])); ;
 			services.AddScoped<IBaseRepo<EmployeeEntity>, BaseRepo<EmployeeEntity>>();
 			services.AddAutoMapper(typeof(Startup));
+			services.AddTransient<IEmployeeService, EmployeeService>();
 		}
 
 		//настройка конвейера middleware

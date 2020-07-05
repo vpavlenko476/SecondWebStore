@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Store.DAL;
 using Store.DAL.Context;
 using Store.DAL.Contracts;
 using Store.DAL.Repositories;
@@ -33,6 +34,7 @@ namespace WebStore
 				).AddRazorRuntimeCompilation();
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"])); ;
 			services.AddScoped<IBaseRepo<EmployeeEntity>, BaseRepo<EmployeeEntity>>();
+			services.AddScoped<UnitOfWork>();
 			services.AddAutoMapper(typeof(Startup));
 			services.AddTransient<IEmployeeService, EmployeeService>();
 		}

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Store.DAL;
 using Store.DAL.Contracts;
 using Store.Domain;
 using Store.Entities;
@@ -11,37 +12,38 @@ namespace Store.Services
 {
 	public class EmployeeService : IEmployeeService
 	{
-		private readonly IBaseRepo<EmployeeEntity> _employeeRepo;
+		private readonly UnitOfWork _unitOfWork;
 		private readonly IMapper _mapper;
-		public EmployeeService(IBaseRepo<EmployeeEntity> employeeRepo, IMapper mapper)
+		public EmployeeService(UnitOfWork unitOfWork, IMapper mapper)
 		{
-			_employeeRepo = employeeRepo;
+			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 		}
 
 		public async Task Delete(int employeeId)
 		{
-			await _employeeRepo.Delete(_employeeRepo.GetAll().Where(e => e.Id == employeeId).Single());
+			var empToDelete = _unitOfWork.EmployeeRepository.GetAll().Where(e => e.Id == employeeId).Single();
+			await _unitOfWork.EmployeeRepository.Delete(empToDelete);
 		}
 
 		public async Task Edit(Employee employee)
 		{
-			await _employeeRepo.Update(_mapper.Map<EmployeeEntity>(employee));
+			await _unitOfWork.EmployeeRepository.Update(_mapper.Map<EmployeeEntity>(employee));
 		}
 
 		public async Task<Employee> GetById(int id)
 		{
-			return _mapper.Map<Employee>(await _employeeRepo.GetOne(id));
+			return _mapper.Map<Employee>(await _unitOfWork.EmployeeRepository.GetOne(id));
 		}
 		
 		public Task<int> Add(Employee employee)
 		{
-			return _employeeRepo.Add(_mapper.Map<EmployeeEntity>(employee));
+			return _unitOfWork.EmployeeRepository.Add(_mapper.Map<EmployeeEntity>(employee));
 		}
 
 		public IEnumerable<Employee> GetAll()
 		{
-			return _employeeRepo.GetAll().Select(e => _mapper.Map<Employee>(e)).AsEnumerable<Employee>();
+			return _unitOfWork.EmployeeRepository.GetAll().Select(_mapper.Map<Employee>);
 		}
 	}
 }

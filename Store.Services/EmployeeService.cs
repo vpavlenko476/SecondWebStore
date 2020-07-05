@@ -1,0 +1,49 @@
+﻿using AutoMapper;
+using Store.DAL;
+using Store.DAL.Contracts;
+using Store.Domain;
+using Store.Entities;
+using Store.Services.Abstract;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Store.Services
+{
+	public class EmployeeService : IEmployeeService
+	{
+		private readonly UnitOfWork _unitOfWork;
+		private readonly IMapper _mapper;
+		public EmployeeService(UnitOfWork unitOfWork, IMapper mapper)
+		{
+			_unitOfWork = unitOfWork;
+			_mapper = mapper;
+		}
+
+		public async Task Delete(int employeeId)
+		{
+			var empToDelete = _unitOfWork.EmployeeRepository.GetAll().Where(e => e.Id == employeeId).Single();
+			await _unitOfWork.EmployeeRepository.Delete(empToDelete);
+		}
+
+		public async Task Edit(Employee employee)
+		{
+			await _unitOfWork.EmployeeRepository.Update(_mapper.Map<EmployeeEntity>(employee));
+		}
+
+		public async Task<Employee> GetById(int id)
+		{
+			return _mapper.Map<Employee>(await _unitOfWork.EmployeeRepository.GetOne(id));
+		}
+		
+		public Task<int> Add(Employee employee)
+		{
+			return _unitOfWork.EmployeeRepository.Add(_mapper.Map<EmployeeEntity>(employee));
+		}
+
+		public IEnumerable<Employee> GetAll()
+		{
+			return _unitOfWork.EmployeeRepository.GetAll().Select(_mapper.Map<Employee>);
+		}
+	}
+}

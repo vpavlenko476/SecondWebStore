@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Store.Domain;
 using Store.Entities;
+using WebStore.ViewModels;
 
 namespace WebStore.Profiles
 {
@@ -10,6 +11,8 @@ namespace WebStore.Profiles
         {
             CreateMap<EmployeeEntity, Employee>();
             CreateMap<Employee, EmployeeEntity>();
+            CreateMap<EmployeeViewModel, Employee>();
+            CreateMap<Employee, EmployeeViewModel>();
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿@model EmployeeViewModel
 <div class="container">
     <form class="p-a-1" asp-controller="Employee" asp-action="Edit" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
         <input asp-for="Id" type="hidden" />
         <div class="form-group">
             <label asp-for="FirstName" class="control-label"></label>

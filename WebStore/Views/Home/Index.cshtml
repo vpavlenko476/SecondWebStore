@@ -1,6 +1,15 @@
 ﻿@*<h1> Главная страница </h1>*@
-
-<partial name="Partial/_Slider"/>
+@using  Store.Services.Abstract
+@inject IProductService ProductService
+@{
+    var products = ProductService.GetProducts(null, null).Take(6).Select(p => new ProductViewModel(){
+        Id = p.Id,
+        Name = p.Name,
+        Price = p.Price,
+        Order = p.Order,
+        ImageUrl = p.ImageUrl                                                                                                                            })
+}
+<partial name="Partial/_Slider" />
 <section>
     <div class="container">
         <div class="row">
@@ -9,8 +18,8 @@
             <div class="col-sm-9 padding-right">
 
                 <partial name="Partial/_Category" />
-                <partial name="Partial/_FeaturesItems" />
-                <partial name="Partial/_RecommendedItems" />              
+                <partial name="Partial/_FeaturesItems" model="products" />
+                <partial name="Partial/_RecommendedItems" />
 
             </div>
         </div>

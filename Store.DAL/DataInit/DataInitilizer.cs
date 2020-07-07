@@ -18,6 +18,30 @@ namespace Store.DAL.DataInit
 			var context = new StoreContext();
 			context.Employees.AddRange(employees);
 			context.SaveChanges();
+			List<SectionEntity> sections = new List<SectionEntity>
+			{
+				new SectionEntity(){Order = 0, ParentId = null, Name = "Спорт"},
+				new SectionEntity(){Order = 0, ParentId = 1, Name = "Nike"},
+				new SectionEntity(){Order = 1, ParentId = 1, Name = "Under Armor"},
+				new SectionEntity(){Order = 2, ParentId = 1, Name = "Adidas"},
+				new SectionEntity(){Order = 3, ParentId = null, Name = "Puma"},
+				new SectionEntity(){Order = 0, ParentId = null, Name = "Для мужчие"},
+				new SectionEntity(){Order = 0, ParentId = 6, Name = "Fendi"}
+			};			
+			context.Sections.AddRange(sections);
+			context.SaveChanges();
+			List<BrandEntity> brands = new List<BrandEntity>()
+			{
+				new BrandEntity(){Order = 0, Name = "Acne"},
+				new BrandEntity(){Order = 1, Name = "Grune Erde"},
+				new BrandEntity(){Order = 2, Name = "Albiro"},
+				new BrandEntity(){Order = 3, Name = "Ronhill"},
+				new BrandEntity(){Order = 4, Name = "Oddmolly"},
+				new BrandEntity(){Order = 5, Name = "Boudestijn"},
+				new BrandEntity(){Order = 6, Name = "Rosch creative culture"}
+			};
+			context.Brands.AddRange(brands);
+			context.SaveChanges();
 		}
 
 		/// <summary>

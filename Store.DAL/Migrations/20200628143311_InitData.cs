@@ -32,8 +32,7 @@ namespace Store.DAL.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
-                oldNullable: true);
-            DataInitilizer.InitData();
+                oldNullable: true);           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

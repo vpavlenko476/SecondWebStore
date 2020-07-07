@@ -32,9 +32,9 @@ namespace WebStore
 				//opt.Conventions.Add() добавление соглашений
 			}
 				).AddRazorRuntimeCompilation();
-			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"])); ;
-			services.AddScoped<IBaseRepo<EmployeeEntity>, BaseRepo<EmployeeEntity>>();
-			services.AddScoped<UnitOfWork>();
+			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));			
+			services.AddScoped<StoreUnitOfWork>();
+			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
 			services.AddTransient<IEmployeeService, EmployeeService>();
 		}

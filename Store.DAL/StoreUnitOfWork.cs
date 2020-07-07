@@ -13,6 +13,7 @@ namespace Store.DAL
 		private IBaseRepo<EmployeeEntity> _employeeRepo;
 		private IBaseRepo<SectionEntity> _sectionRepo;
 		private IBaseRepo<BrandEntity> _brandRepo;
+		private IBaseRepo<ProdctEntity> _productRepo;
 		public StoreUnitOfWork(StoreContext storeContext)
 		{
 			_storeContext = storeContext;			
@@ -48,6 +49,17 @@ namespace Store.DAL
 					_brandRepo = new BaseRepo<BrandEntity>(_storeContext);
 				}
 				return _brandRepo;
+			}
+		}
+		public IBaseRepo<ProdctEntity> ProductRepository
+		{
+			get
+			{
+				if (_productRepo == null)
+				{
+					_productRepo = new BaseRepo<ProdctEntity>(_storeContext);
+				}
+				return _productRepo;
 			}
 		}
 

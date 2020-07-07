@@ -7,8 +7,6 @@ namespace Store.Services.Abstract
 {
 	interface IProductService
 	{
-		IEnumerable<Section> GetSections();
-
-		IEnumerable<Brand> GetBrands();
+		IEnumerable<Product> GetProducts(Section section = null, Brand brand = null);		
 	}
 }

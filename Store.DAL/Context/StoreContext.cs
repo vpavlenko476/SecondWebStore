@@ -8,6 +8,8 @@ namespace Store.DAL.Context
 		internal StoreContext() {}
 		public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }
 		public DbSet<EmployeeEntity> Employees { get; set; }
+		public DbSet<SectionEntity> Sections { get; set; }
+		public DbSet<BrandEntity> Brands { get; set; }
 
 		/// <summary>
 		/// Выполняется если вызван конструктор без параметров

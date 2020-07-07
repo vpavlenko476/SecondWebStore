@@ -3,7 +3,7 @@ using Store.Entities.Base;
 
 namespace Store.Entities
 {
-	class BrandEntity : BaseNamedEntity, IOrderedEntity
+	public class BrandEntity : BaseNamedEntity, IOrderedEntity
 	{
 		public int Order { get; set; }
 	}

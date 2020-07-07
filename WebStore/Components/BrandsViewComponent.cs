@@ -14,7 +14,7 @@ namespace WebStore.Components
 		{
 			_unitOfWork = unitOfWork;
 		}
-		public async Task<IViewComponentResult> Invoke() => View();
+		public IViewComponentResult Invoke() => View(GetBrands());
 		public IEnumerable<BrandViewModel> GetBrands()
 		{
 			return _unitOfWork.BrandRepository.GetAll()

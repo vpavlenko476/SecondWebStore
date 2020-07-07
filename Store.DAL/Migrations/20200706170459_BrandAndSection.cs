@@ -34,8 +34,7 @@ namespace Store.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sections", x => x.Id);
-                });
-            DataInitilizer.InitData();
+                });           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

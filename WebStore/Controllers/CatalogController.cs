@@ -13,13 +13,13 @@ namespace WebStore.Controllers
         {
             _productService = productService;
         }
-        public IActionResult Shop(Section section, Brand brand)
+        public IActionResult Shop(int? sectionId, int? brandId)
         {
-            var products = _productService.GetProducts(section, brand);
+            var products = _productService.GetProducts(sectionId, brandId);
             return View(new CatalogViewModel() 
             {
-                SectionId = section.Id,
-                BrandId = brand.Id,
+                SectionId = sectionId,
+                BrandId = brandId,
                 Products = products.Select(p=>new ProductViewModel() 
                 {
                     Name = p.Name,

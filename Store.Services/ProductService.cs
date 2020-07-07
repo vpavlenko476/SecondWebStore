@@ -17,16 +17,16 @@ namespace Store.Services
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 		}
-		public IEnumerable<Product> GetProducts(Section section = null, Brand brand = null)
+		public IEnumerable<Product> GetProducts(int? sectionId = null, int? brandId = null)
 		{
 			var products = _unitOfWork.ProductRepository.GetAll().ToList();
-			if(section!=null)
+			if(sectionId != null)
 			{
-				return _mapper.Map<List<Product>>(products.Where(p => p.SectionId == section.Id));				
+				return _mapper.Map<List<Product>>(products.Where(p => p.SectionId == sectionId));				
 			}
-			if (brand != null)
+			if (brandId != null)
 			{
-				return _mapper.Map<List<Product>>(products.Where(p => p.BrandId == brand.Id));				
+				return _mapper.Map<List<Product>>(products.Where(p => p.BrandId == brandId));				
 			}			
 			return _mapper.Map<List<Product>>(products);
 		}

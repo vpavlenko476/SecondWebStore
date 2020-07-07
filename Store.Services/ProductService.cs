@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Store.Services
 {
-	class ProductService : IProductService
+	public class ProductService : IProductService
 	{
 		private readonly StoreUnitOfWork _unitOfWork;
 		private readonly IMapper _mapper;

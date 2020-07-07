@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Store.Services.Abstract
 {
-	interface IProductService
+	public interface IProductService
 	{
 		IEnumerable<Product> GetProducts(Section section = null, Brand brand = null);		
 	}

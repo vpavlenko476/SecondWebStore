@@ -34,6 +34,7 @@ namespace WebStore
 				).AddRazorRuntimeCompilation();
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));			
 			services.AddScoped<StoreUnitOfWork>();
+			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
 			services.AddTransient<IEmployeeService, EmployeeService>();
 		}

@@ -7,11 +7,13 @@ using Store.DAL.Repositories;
 
 namespace Store.DAL
 {
-	public class UnitOfWork: IDisposable
+	public class StoreUnitOfWork: IDisposable
 	{
 		private readonly StoreContext _storeContext;
 		private IBaseRepo<EmployeeEntity> _employeeRepo;
-		public UnitOfWork(StoreContext storeContext)
+		private IBaseRepo<SectionEntity> _sectionRepo;
+		private IBaseRepo<BrandEntity> _brandRepo;
+		public StoreUnitOfWork(StoreContext storeContext)
 		{
 			_storeContext = storeContext;			
 		}
@@ -24,6 +26,28 @@ namespace Store.DAL
 					_employeeRepo = new BaseRepo<EmployeeEntity>(_storeContext);
 				}
 				return _employeeRepo;
+			}
+		}
+		public IBaseRepo<SectionEntity> SectionRepository
+		{
+			get
+			{
+				if (_sectionRepo == null)
+				{
+					_sectionRepo = new BaseRepo<SectionEntity>(_storeContext);
+				}
+				return _sectionRepo;
+			}
+		}
+		public IBaseRepo<BrandEntity> BrandRepository
+		{
+			get
+			{
+				if (_brandRepo == null)
+				{
+					_brandRepo = new BaseRepo<BrandEntity>(_storeContext);
+				}
+				return _brandRepo;
 			}
 		}
 

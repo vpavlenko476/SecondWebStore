@@ -35,7 +35,7 @@ namespace Store.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Sections", x => x.Id);
                 });
-          //  DataInitilizer.InitData();
+            DataInitilizer.InitData();
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

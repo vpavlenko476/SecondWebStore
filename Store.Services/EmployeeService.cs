@@ -12,9 +12,9 @@ namespace Store.Services
 {
 	public class EmployeeService : IEmployeeService
 	{
-		private readonly UnitOfWork _unitOfWork;
+		private readonly StoreUnitOfWork _unitOfWork;
 		private readonly IMapper _mapper;
-		public EmployeeService(UnitOfWork unitOfWork, IMapper mapper)
+		public EmployeeService(StoreUnitOfWork unitOfWork, IMapper mapper)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;

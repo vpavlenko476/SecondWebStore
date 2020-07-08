@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Store.Entities
 {	
+	[Table("Sections")]
 	public class SectionEntity : BaseNamedEntity, IOrderedEntity
 	{
 		public int Order { get; set; }

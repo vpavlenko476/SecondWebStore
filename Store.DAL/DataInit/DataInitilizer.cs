@@ -2,46 +2,58 @@
 using Store.DAL.Context;
 using Store.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Store.DAL.DataInit
 {
-	public static class DataInitilizer
+	public class DataInitilizer
 	{
-		public static void InitData()
+		private readonly StoreContext _context;
+		public DataInitilizer(StoreContext context)
 		{
-			List<EmployeeEntity> employees = new List<EmployeeEntity>()
+			_context = context;
+		}
+		public void InitData()
 		{
-			new EmployeeEntity(){FirstName="Name0", SecondName="SecondName0", Patronymic="Patronymic0", Age=22, Email="test0@email.ru", MobilePhone="+7(999)000-00-00"},
-			new EmployeeEntity(){FirstName="Name1", SecondName="SecondName1", Patronymic="Patronymic1", Age=22, Email="test1@email.ru", MobilePhone="+7(999)000-00-01"},
-			new EmployeeEntity(){FirstName="Name2", SecondName="SecondName2", Patronymic="Patronymic2", Age=22, Email="test2@email.ru", MobilePhone="+7(999)000-00-02"}
-		};
-			var context = new StoreContext();
-			context.Employees.AddRange(employees);
-			context.SaveChanges();
-			List<SectionEntity> sections = new List<SectionEntity>
+			var db = _context.Database;
+			db.Migrate();
+
+			if (_context.Products.Any()) return;
+
+			using(db.BeginTransaction())
 			{
-				new SectionEntity(){Order = 0, ParentId = null, Name = "Спорт"},
-				new SectionEntity(){Order = 0, ParentId = 1, Name = "Nike"},
-				new SectionEntity(){Order = 1, ParentId = 1, Name = "Under Armor"},
-				new SectionEntity(){Order = 2, ParentId = 1, Name = "Adidas"},
-				new SectionEntity(){Order = 3, ParentId = null, Name = "Puma"},
-				new SectionEntity(){Order = 0, ParentId = null, Name = "Для мужчие"},
-				new SectionEntity(){Order = 0, ParentId = 6, Name = "Fendi"}
-			};			
-			context.Sections.AddRange(sections);
-			context.SaveChanges();
-			List<BrandEntity> brands = new List<BrandEntity>()
+				_context.Employees.AddRange(TestData.Employees);				
+				_context.SaveChanges();				
+				db.CommitTransaction();
+			}
+
+			using (db.BeginTransaction())
 			{
-				new BrandEntity(){Order = 0, Name = "Acne"},
-				new BrandEntity(){Order = 1, Name = "Grune Erde"},
-				new BrandEntity(){Order = 2, Name = "Albiro"},
-				new BrandEntity(){Order = 3, Name = "Ronhill"},
-				new BrandEntity(){Order = 4, Name = "Oddmolly"},
-				new BrandEntity(){Order = 5, Name = "Boudestijn"},
-				new BrandEntity(){Order = 6, Name = "Rosch creative culture"}
-			};
-			context.Brands.AddRange(brands);
-			context.SaveChanges();
+				_context.Sections.AddRange(TestData.Sections);
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Sections] ON");
+				_context.SaveChanges();
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Sections] OFF");
+				db.CommitTransaction();
+			}
+
+			using (db.BeginTransaction())
+			{
+				_context.Brands.AddRange(TestData.Brands);
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Brands] ON");
+				_context.SaveChanges();
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+				db.CommitTransaction();
+			}
+
+			using (db.BeginTransaction())
+			{
+				_context.Products.AddRange(TestData.Products);
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] ON");
+				_context.SaveChanges();
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] OFF");
+				db.CommitTransaction();
+			}
+
 		}
 
 		/// <summary>

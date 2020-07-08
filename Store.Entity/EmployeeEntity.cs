@@ -1,8 +1,10 @@
 ﻿using Store.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Store.Entities
 {
+	[Table("Employees")]
 	public class EmployeeEntity: BaseEntity
 	{
 		[StringLength(50)]

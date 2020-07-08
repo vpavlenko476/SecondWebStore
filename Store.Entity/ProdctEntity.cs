@@ -16,9 +16,7 @@ namespace Store.Entities
 
 		[ForeignKey(nameof(BrandId))]
 		public virtual BrandEntity Brand { get; set; }
-		public string ImageUrl { get; set; }
-
-		[Column(TypeName = "double")]
+		public string ImageUrl { get; set; }		
 		public double Price { get; set; }
 	}
 }

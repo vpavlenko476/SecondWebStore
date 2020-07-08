@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Store.Entities
 {
-	[Table("ProductBrands")]
+	[Table("Brands")]
 	public class BrandEntity : BaseNamedEntity, IOrderedEntity
 	{
 		public int Order { get; set; }

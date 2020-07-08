@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200708184154_AdditionalAtributes.cs" />
+    <Compile Remove="Migrations\20200708184154_AdditionalAtributes.Designer.cs" />
+    <Compile Remove="Migrations\20200708184731_fixProductPrice.cs" />
+    <Compile Remove="Migrations\20200708184731_fixProductPrice.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">

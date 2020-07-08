@@ -15,6 +15,7 @@ namespace WebStore.Profiles
             CreateMap<Employee, EmployeeViewModel>();
             CreateMap<ProdctEntity, Product>();
             CreateMap<Product, ProdctEntity>();
+            CreateMap<Product, ProductViewModel>();
         }
     }
 }

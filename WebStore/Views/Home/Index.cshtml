@@ -1,13 +1,7 @@
 ﻿@inject IProductService ProductService
+@inject IMapper _mapper
 @{
-    var products = ProductService.GetProducts(null, null).Take(6).Select(p => new ProductViewModel()
-    {
-        Id = p.Id,
-        Name = p.Name,
-        Price = p.Price,
-        Order = p.Order,
-        ImageUrl = p.ImageUrl
-    });
+    var products = ProductService.GetProducts(null, null).Take(6).Select(p => _mapper.Map<ProductViewModel>(p));
 }
 <partial name="Partial/_Slider" />
 <section>

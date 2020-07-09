@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Store.DAL.Context;
 using Store.Entities;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ namespace Store.DAL.DataInit
 
 			if (_context.Products.Any()) return;
 
-			using(db.BeginTransaction())
+			using (db.BeginTransaction())
 			{
-				_context.Employees.AddRange(TestData.Employees);				
-				_context.SaveChanges();				
+				_context.Employees.AddRange(TestData.Employees);
+				_context.SaveChanges();
 				db.CommitTransaction();
 			}
 
@@ -54,6 +55,59 @@ namespace Store.DAL.DataInit
 				db.CommitTransaction();
 			}
 
+			//var products = TestData.Products;
+			//var sections = TestData.Sections;
+			//var brands = TestData.Brands;
+			//var prosuct_sections = products.Join(
+			//	sections, 
+			//	p => p.SectionId, 
+			//	s => s.Id, 
+			//	(product,section)=>(product,section));
+
+			//foreach(var (product, section) in prosuct_sections)
+			//{
+			//	product.Section = section;
+			//	product.SectionId = 0;
+			//}
+
+			//var prosuct_brands = products.Join(
+			//	brands,
+			//	p => p.BrandId,
+			//	s => s.Id,
+			//	(product, brand) => (product, brand));
+
+			//foreach (var (product, brand) in prosuct_brands)
+			//{
+			//	product.Brand = brand;
+			//	product.BrandId = null;
+			//}
+
+			//var child_sections = sections.Join(
+			//	sections,
+			//	child => child.ParentId,
+			//	parrent => parrent.Id,
+			//	(child, parrent) => (child, parrent));
+
+			//foreach (var (child, parrent) in child_sections)
+			//{
+			//	child.ParentSection = parrent;
+			//	child.ParentId = null;
+			//}
+
+			//foreach (var section in sections)
+			//	section.Id = 0;
+
+			//foreach (var brand in brands)
+			//	brand.Id = 0;
+
+			//using(db.BeginTransaction())
+			//{
+			//	_context.Sections.AddRange(sections);
+			//	_context.Brands.AddRange(brands);
+			//	_context.Products.AddRange(products);
+			//	_context.SaveChanges();
+			//	db.CommitTransaction();
+			//}
 		}
 
 		/// <summary>

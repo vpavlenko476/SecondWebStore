@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Store.Entities.Identity
 {
-	class Role: IdentityRole
+	public class Role: IdentityRole
 	{
 		/// <summary>
 		/// имя роли администратора

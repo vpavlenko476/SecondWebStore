@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Store.Entities;
+using Store.Entities.Identity;
 
 namespace Store.DAL.Context
 {
-	public class StoreContext: DbContext
+	public class StoreContext: IdentityDbContext<User, Role, string>
 	{
 		internal StoreContext() {}
 		public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }

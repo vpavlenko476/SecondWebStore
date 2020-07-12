@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Store.Entities.Identity
 {
-	class User : IdentityUser
+	public class User : IdentityUser
 	{
 		/// <summary>
 		/// Имя пользователя администратора

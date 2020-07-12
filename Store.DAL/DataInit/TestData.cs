@@ -41,9 +41,9 @@ namespace Store.DAL.DataInit
 
 		public static List<EmployeeEntity> Employees = new List<EmployeeEntity>()
 		{
-			new EmployeeEntity(){FirstName="Name0", SecondName="SecondName0", Patronymic="Patronymic0", Age=22, Email="test0@email.ru", MobilePhone="+7(999)000-00-00"},
-			new EmployeeEntity(){FirstName="Name1", SecondName="SecondName1", Patronymic="Patronymic1", Age=22, Email="test1@email.ru", MobilePhone="+7(999)000-00-01"},
-			new EmployeeEntity(){FirstName="Name2", SecondName="SecondName2", Patronymic="Patronymic2", Age=22, Email="test2@email.ru", MobilePhone="+7(999)000-00-02"}
+			new EmployeeEntity(){Name="Name0", SecondName="SecondName0", Patronymic="Patronymic0", Age=22, Email="test0@email.ru", MobilePhone="+7(999)000-00-00"},
+			new EmployeeEntity(){Name="Name1", SecondName="SecondName1", Patronymic="Patronymic1", Age=22, Email="test1@email.ru", MobilePhone="+7(999)000-00-01"},
+			new EmployeeEntity(){Name="Name2", SecondName="SecondName2", Patronymic="Patronymic2", Age=22, Email="test2@email.ru", MobilePhone="+7(999)000-00-02"}
 		};
 
 		public static List<BrandEntity> Brands = new List<BrandEntity>()

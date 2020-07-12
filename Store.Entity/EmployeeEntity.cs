@@ -1,14 +1,12 @@
-﻿using Store.Entity;
+﻿using Store.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Store.Entities
 {
 	[Table("Employees")]
-	public class EmployeeEntity: BaseEntity
-	{
-		[StringLength(50)]
-		public string FirstName { get; set; }
+	public class EmployeeEntity: BaseNamedEntity
+	{		
 		[StringLength(50)]
 		public string SecondName { get; set; }
 		[StringLength(50)]

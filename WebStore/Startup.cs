@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +13,10 @@ using Store.DAL.Contracts;
 using Store.DAL.DataInit;
 using Store.DAL.Repositories;
 using Store.Entities;
+using Store.Entities.Identity;
 using Store.Services;
 using Store.Services.Abstract;
+using System;
 using WebStore.Infrastructure.Middleware;
 
 namespace WebStore
@@ -33,6 +36,46 @@ namespace WebStore
 				//opt.Conventions.Add() добавление соглашений
 			}
 				).AddRazorRuntimeCompilation();
+			services.AddIdentity<User, Role>()
+				.AddEntityFrameworkStores<StoreContext>()
+				.AddDefaultTokenProviders();
+
+			//конфигурация Identity
+			services.Configure<IdentityOptions>(opt =>
+			{
+#if DEBUG
+				opt.Password.RequiredLength = 4;
+				opt.Password.RequireDigit = false;
+				opt.Password.RequireLowercase = false;
+				opt.Password.RequireUppercase = false;
+				opt.Password.RequireNonAlphanumeric = false;
+				opt.Password.RequiredUniqueChars = 3;
+
+#endif
+				opt.User.RequireUniqueEmail = false;
+
+				//все новые пользователи должны быть разблокированы
+				opt.Lockout.AllowedForNewUsers = true;
+				opt.Lockout.MaxFailedAccessAttempts = 10;
+				opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+
+			});
+
+			//настройка cookie для Identity
+			services.ConfigureApplicationCookie(opt =>
+			{
+				opt.Cookie.Name = "WebStorePerProj";
+				opt.Cookie.HttpOnly = true;
+				opt.ExpireTimeSpan = TimeSpan.FromDays(10);
+
+				opt.LoginPath = "/Accaunt/Login";
+				opt.LogoutPath = "/Accaunt/Logout";
+				opt.AccessDeniedPath = "/Accaunt/AccessDenied";
+
+				//автоматическая смена идентификатора сессии при авторизации
+				opt.SlidingExpiration = true;
+			});
+
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));
 			services.AddTransient<DataInitilizer>();
 			services.AddScoped<StoreUnitOfWork>();
@@ -52,6 +95,10 @@ namespace WebStore
 			app.UseStaticFiles();
 			app.UseDefaultFiles();
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
+			
 			app.Use(async (context, next) =>
 			{
 				//действие над контекстом до

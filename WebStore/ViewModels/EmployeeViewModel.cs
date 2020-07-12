@@ -13,7 +13,7 @@ namespace WebStore.ViewModels
 		[Required(ErrorMessage = "Введите Имя")]
 		[StringLength(200, MinimumLength = 3, ErrorMessage = "Длина Имени должна быть от 3 до 200 символов")]
 		[RegularExpression(@"[А-ЯЁ][а-яё]", ErrorMessage = "Ошибка формата имени")]
-		public string FirstName { get; set; }
+		public string Name { get; set; }
 
 		[Display(Name = "Фамилия")]
 		[Required(ErrorMessage = "Введите Фамилию")]

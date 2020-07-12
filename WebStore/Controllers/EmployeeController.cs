@@ -38,8 +38,8 @@ namespace WebStore.Controllers
 		[HttpPost]
 		public async Task<IActionResult> EditAsync(EmployeeViewModel employeeVM)
 		{
-			if (employeeVM.FirstName == "QWE")
-				ModelState.AddModelError(nameof(employeeVM.FirstName), "Странное имя");
+			if (employeeVM.Name == "QWE")
+				ModelState.AddModelError(nameof(employeeVM.Name), "Странное имя");
 			if (ModelState.IsValid)
 			{
 				await _employeeService.Edit(_mapper.Map<Employee>(employeeVM));

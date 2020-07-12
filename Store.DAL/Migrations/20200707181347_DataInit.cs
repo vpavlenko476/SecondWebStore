@@ -7,7 +7,7 @@ namespace Store.DAL.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            DataInitilizer.InitData();
+           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

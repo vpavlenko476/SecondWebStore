@@ -22,44 +22,28 @@ namespace Store.DAL
 		{
 			get 
 			{
-				if(_employeeRepo==null)
-				{
-					_employeeRepo = new BaseRepo<EmployeeEntity>(_storeContext);
-				}
-				return _employeeRepo;
+				return _employeeRepo ?? new BaseRepo<EmployeeEntity>(_storeContext);
 			}
 		}
 		public IBaseRepo<SectionEntity> SectionRepository
 		{
 			get
 			{
-				if (_sectionRepo == null)
-				{
-					_sectionRepo = new BaseRepo<SectionEntity>(_storeContext);
-				}
-				return _sectionRepo;
+				return _sectionRepo ?? new BaseRepo<SectionEntity>(_storeContext);
 			}
 		}
 		public IBaseRepo<BrandEntity> BrandRepository
 		{
 			get
 			{
-				if (_brandRepo == null)
-				{
-					_brandRepo = new BaseRepo<BrandEntity>(_storeContext);
-				}
-				return _brandRepo;
+				return _brandRepo ?? new BaseRepo<BrandEntity>(_storeContext);
 			}
 		}
 		public IBaseRepo<ProdctEntity> ProductRepository
 		{
 			get
 			{
-				if (_productRepo == null)
-				{
-					_productRepo = new BaseRepo<ProdctEntity>(_storeContext);
-				}
-				return _productRepo;
+				return _productRepo ?? new BaseRepo<ProdctEntity>(_storeContext);
 			}
 		}
 

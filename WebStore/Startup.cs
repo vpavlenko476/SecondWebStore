@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Store.DAL;
 using Store.DAL.Context;
 using Store.DAL.Contracts;
+using Store.DAL.DataInit;
 using Store.DAL.Repositories;
 using Store.Entities;
 using Store.Services;
@@ -32,7 +33,8 @@ namespace WebStore
 				//opt.Conventions.Add() добавление соглашений
 			}
 				).AddRazorRuntimeCompilation();
-			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));			
+			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));
+			services.AddTransient<DataInitilizer>();
 			services.AddScoped<StoreUnitOfWork>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
@@ -40,8 +42,9 @@ namespace WebStore
 		}
 
 		//настройка конвейера middleware
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataInitilizer dbInit)
 		{
+			dbInit.InitData();
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

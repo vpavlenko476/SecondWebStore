@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.DAL.Context;
 
 namespace Store.DAL.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20200708185146_AddAttributes")]
+    partial class AddAttributes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace Store.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("ProductBrands");
                 });
 
             modelBuilder.Entity("Store.Entities.EmployeeEntity", b =>
@@ -127,7 +129,7 @@ namespace Store.DAL.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Sections");
+                    b.ToTable("ProductSections");
                 });
 
             modelBuilder.Entity("Store.Entities.ProdctEntity", b =>

@@ -19,7 +19,7 @@ namespace Store.Services
 		}
 		public IEnumerable<Product> GetProducts(int? sectionId = null, int? brandId = null)
 		{
-			var products = _unitOfWork.ProductRepository.GetAll().ToList();
+			var products = _unitOfWork.ProductRepository.GetAll();
 			if(sectionId != null)
 			{
 				return _mapper.Map<List<Product>>(products.Where(p => p.SectionId == sectionId));				

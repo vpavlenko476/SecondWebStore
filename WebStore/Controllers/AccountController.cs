@@ -17,10 +17,10 @@ namespace WebStore.Controllers
 		}
 
 		#region Registration
-		public IActionResult Register() => View();
+		public IActionResult Registration() => View();
 
 		[HttpPost, ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register(RegisterUserViewModel userModel)
+		public async Task<IActionResult> Registration(RegisterUserViewModel userModel)
 		{
 			if (!ModelState.IsValid)
 			{

@@ -1,7 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,10 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Store.DAL;
 using Store.DAL.Context;
-using Store.DAL.Contracts;
 using Store.DAL.DataInit;
-using Store.DAL.Repositories;
-using Store.Entities;
 using Store.Entities.Identity;
 using Store.Services;
 using Store.Services.Abstract;
@@ -36,6 +32,8 @@ namespace WebStore
 				//opt.Conventions.Add() добавление соглашений
 			}
 				).AddRazorRuntimeCompilation();
+			
+			//добавляем систему Identity
 			services.AddIdentity<User, Role>()
 				.AddEntityFrameworkStores<StoreContext>()
 				.AddDefaultTokenProviders();

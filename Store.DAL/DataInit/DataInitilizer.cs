@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Store.DAL.Context;
 using Store.Entities;
+using Store.Entities.Identity;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +12,8 @@ namespace Store.DAL.DataInit
 	public class DataInitilizer
 	{
 		private readonly StoreContext _context;
+		private readonly UserManager<User> _userManager;
+		private readonly RoleManager<Role> _roleManager;
 		public DataInitilizer(StoreContext context)
 		{
 			_context = context;
@@ -52,6 +56,15 @@ namespace Store.DAL.DataInit
 				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] ON");
 				_context.SaveChanges();
 				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] OFF");
+				db.CommitTransaction();
+			}
+
+			using (db.BeginTransaction())
+			{
+				_context.Blogs.AddRange(TestData.Blogs);
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] ON");
+				_context.SaveChanges();
+				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
 				db.CommitTransaction();
 			}
 

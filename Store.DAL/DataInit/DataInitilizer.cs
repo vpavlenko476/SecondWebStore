@@ -62,9 +62,9 @@ namespace Store.DAL.DataInit
 			using (db.BeginTransaction())
 			{
 				_context.Blogs.AddRange(TestData.Blogs);
-				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] ON");
+				
 				_context.SaveChanges();
-				db.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
+				
 				db.CommitTransaction();
 			}
 

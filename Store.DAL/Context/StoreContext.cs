@@ -14,6 +14,7 @@ namespace Store.DAL.Context
 		public DbSet<SectionEntity> Sections { get; set; }
 		public DbSet<BrandEntity> Brands { get; set; }
 		public DbSet<ProdctEntity> Products { get; set; }
+		public DbSet<BlogEntity> Blogs { get; set; }
 
 		/// <summary>
 		/// Выполняется если вызван конструктор без параметров

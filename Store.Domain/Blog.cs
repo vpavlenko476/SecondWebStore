@@ -3,7 +3,7 @@ using System;
 
 namespace Store.Domain
 {
-	class Blog
+	public class Blog
 	{
 		public int Id { get; set; }		
 		public User Author { get; set; }

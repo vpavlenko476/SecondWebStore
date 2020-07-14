@@ -16,6 +16,8 @@ namespace WebStore.Profiles
             CreateMap<ProdctEntity, Product>();
             CreateMap<Product, ProdctEntity>();
             CreateMap<Product, ProductViewModel>();
+            CreateMap<Blog, BlogEntity>();
+            CreateMap<BlogEntity, Blog>();
         }
     }
 }

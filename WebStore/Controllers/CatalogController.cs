@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Services.Abstract;
 using System.Linq;
+using System.Threading.Tasks;
 using WebStore.ViewModels;
 
 namespace WebStore.Controllers
@@ -24,6 +25,18 @@ namespace WebStore.Controllers
 				BrandId = brandId,
 				Products = products.Select(p => _mapper.Map<ProductViewModel>(p)).OrderBy(p => p.Order),
 			});
+		}
+
+		public async Task<IActionResult> Details(int id)
+		{
+			var product = await _productService.GetProductByIdAsync(id);
+
+			if(product is null)
+			{
+				return NotFound();
+			}
+
+			return View(_mapper.Map<ProductViewModel>(product));
 		}
 	}
 }

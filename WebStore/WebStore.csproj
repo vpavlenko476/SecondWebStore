@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\EshopTeamplate\images\shop\product1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EshopTeamplate\images\shop\product2.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EshopTeamplate\images\shop\product3.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EshopTeamplate\images\shop\product4.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EshopTeamplate\images\shop\product5.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EshopTeamplate\images\shop\product6.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
@@ -28,6 +37,17 @@
     <ProjectReference Include="..\Store.Domain\Store.Domain.csproj" />
     <ProjectReference Include="..\Store.Entity\Store.Entities.csproj" />
     <ProjectReference Include="..\Store.Services\Store.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\EshopTeamplate\images\shop\product7.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\EshopTeamplate\images\shop\product8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

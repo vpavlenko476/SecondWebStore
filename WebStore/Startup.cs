@@ -98,12 +98,12 @@ namespace WebStore
 			app.UseAuthentication();
 			app.UseAuthorization();
 			
-			app.Use(async (context, next) =>
-			{
-				//действие над контекстом до
-				await next();//вызов следйющего middleware
-				//действие над контекстом после
-			});
+			//app.Use(async (context, next) =>
+			//{
+			//	//действие над контекстом до
+			//	await next();//вызов следйющего middleware
+			//	//действие над контекстом после
+			//});
 			app.UseMiddleware<TestMiddleware>(); //использование кастомного middleware
 			app.UseEndpoints(endpoints =>
 			{

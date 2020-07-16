@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Store.DAL;
 using Store.Domain;
-using Store.Entities;
 using Store.Services.Abstract;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Store.Services
 {
@@ -17,6 +17,15 @@ namespace Store.Services
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 		}
+
+		public async Task<Product> GetProductByIdAsync(int id)
+		{
+			var productEntity = await _unitOfWork.ProductRepository.GetOne(id);
+			var ptoduct = _mapper.Map<Product>(productEntity);
+			ptoduct.Brand = _mapper.Map<Brand>(await _unitOfWork.BrandRepository.GetOne(productEntity.BrandId));			
+			return ptoduct;
+		}
+
 		public IEnumerable<Product> GetProducts(int? sectionId = null, int? brandId = null)
 		{
 			var products = _unitOfWork.ProductRepository.GetAll();

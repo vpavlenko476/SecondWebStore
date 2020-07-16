@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Domain;
+using Store.Entities.Identity;
 using Store.Services.Abstract;
 using System.Threading.Tasks;
 using WebStore.ViewModels;
@@ -21,10 +22,11 @@ namespace WebStore.Controllers
 		public IActionResult Index() => View(_employeeService.GetAll());
 
 		public async Task<IActionResult> DetailsAsync(int id)
-		{			
+		{
 			return View(await _employeeService.GetById(id));
 		}
 
+		[Authorize(Roles = Role.Administrator)]
 		[HttpGet]
 		public async Task<IActionResult> EditAsync(int? id)
 		{
@@ -34,9 +36,10 @@ namespace WebStore.Controllers
 
 			var employee = await _employeeService.GetById(id.GetValueOrDefault());
 			if (employee == null) return NotFound();
-			return View(_mapper.Map<EmployeeViewModel>(employee));			
+			return View(_mapper.Map<EmployeeViewModel>(employee));
 		}
 
+		[Authorize(Roles = Role.Administrator)]
 		[HttpPost]
 		public async Task<IActionResult> EditAsync(EmployeeViewModel employeeVM)
 		{
@@ -53,14 +56,16 @@ namespace WebStore.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
+		[Authorize(Roles = Role.Administrator)]
 		[HttpGet]
 		public async Task<IActionResult> Delete(int id)
 		{
 			if (id <= 0) return BadRequest();
-			var employee = await _employeeService.GetById(id);			
+			var employee = await _employeeService.GetById(id);
 			return View(_mapper.Map<EmployeeViewModel>(employee));
 		}
 
+		[Authorize(Roles = Role.Administrator)]
 		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmedAsync(int id)
 		{

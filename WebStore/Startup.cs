@@ -66,9 +66,9 @@ namespace WebStore
 				opt.Cookie.HttpOnly = true;
 				opt.ExpireTimeSpan = TimeSpan.FromDays(10);
 
-				opt.LoginPath = "/Accaunt/Login";
-				opt.LogoutPath = "/Accaunt/Logout";
-				opt.AccessDeniedPath = "/Accaunt/AccessDenied";
+				opt.LoginPath = "/Account/Login";
+				opt.LogoutPath = "/Account/Logout";
+				opt.AccessDeniedPath = "/Account/AccessDenied";
 
 				//автоматическая смена идентификатора сессии при авторизации
 				opt.SlidingExpiration = true;

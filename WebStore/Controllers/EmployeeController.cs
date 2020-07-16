@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Domain;
 using Store.Services.Abstract;
@@ -7,6 +8,7 @@ using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
+	[Authorize]
 	public class EmployeeController : Controller
 	{
 		private readonly IEmployeeService _employeeService;

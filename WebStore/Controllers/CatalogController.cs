@@ -18,7 +18,7 @@ namespace WebStore.Controllers
 		}
 		public IActionResult Shop(int? sectionId, int? brandId)
 		{
-			var products = _productService.GetProducts(sectionId, brandId);
+			var products = _productService.GetProducts(sectionId, brandId, null);
 			return View(new CatalogViewModel()
 			{
 				SectionId = sectionId,

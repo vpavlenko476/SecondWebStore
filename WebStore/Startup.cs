@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -76,6 +77,7 @@ namespace WebStore
 
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));
 			services.AddTransient<DataInitilizer>();
+			services.AddScoped<ICartService, CartService>();
 			services.AddScoped<StoreUnitOfWork>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));

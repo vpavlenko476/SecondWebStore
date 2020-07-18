@@ -1,16 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Store.Domain.CartModel;
 using Store.Services.Abstract;
 using Store.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Store.Services.InCookies
 {
-	class CartService : ICartService
+	public class CartService : ICartService
 	{
 		private readonly IProductService _productService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly IMapper _mapper;
 		private readonly string _cartName;
 		private Cart cart 
 		{
@@ -34,10 +37,11 @@ namespace Store.Services.InCookies
 				ReplaceCookies(_httpContextAccessor.HttpContext.Response.Cookies, JsonConvert.SerializeObject(value));
 			}
 		}
-		public CartService(IProductService productService, IHttpContextAccessor httpContextAccessor)
+		public CartService(IProductService productService, IHttpContextAccessor httpContextAccessor, IMapper mapper)
 		{
 			_productService = productService;
 			_httpContextAccessor = httpContextAccessor;
+			_mapper = mapper;
 
 			var user = httpContextAccessor.HttpContext.User;
 			var userName = user.Identity.IsAuthenticated ? user.Identity.Name : null;//проверка что пользователь вошел в систему
@@ -84,7 +88,12 @@ namespace Store.Services.InCookies
 
 		public CartViewModel GetCartModel()
 		{
-			throw new System.NotImplementedException();
+			var product = _productService.GetProducts(null, null, cart.Items.Select(i=>i.ProductId).ToArray());
+			var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(product).ToDictionary(p => p.Id);
+			return new CartViewModel()
+			{
+				Items = cart.Items.Select(item => (productVM[item.ProductId], item.Count))
+			};
 		}
 
 		public void RemoveFromCart(int id)

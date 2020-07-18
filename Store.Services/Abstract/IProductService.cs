@@ -13,7 +13,7 @@ namespace Store.Services.Abstract
 		/// </summary>
 		/// <param name="sectionId">Секция</param>
 		/// <param name="brandId">Бренд</param>		
-		IEnumerable<Product> GetProducts(int? sectionId, int? brandId);
+		IEnumerable<Product> GetProducts(int? sectionId, int? brandId, int[] Ids);
 
 		/// <summary>
 		/// Получение товара по его идентификатору

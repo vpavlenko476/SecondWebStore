@@ -5,7 +5,7 @@ using Store.Domain;
 using Store.Entities.Identity;
 using Store.Services.Abstract;
 using System.Threading.Tasks;
-using WebStore.ViewModels;
+using Store.ViewModels;
 
 namespace WebStore.Controllers
 {

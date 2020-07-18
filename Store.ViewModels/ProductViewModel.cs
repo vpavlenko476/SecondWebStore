@@ -1,7 +1,7 @@
 ﻿using Store.Domain;
 using Store.Entities.Abstract;
 
-namespace WebStore.ViewModels
+namespace Store.ViewModels
 {
 	public class ProductViewModel: INamedEntity, IOrderedEntity
 	{

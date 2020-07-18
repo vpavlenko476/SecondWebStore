@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Services.Abstract;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.ViewModels;
+using Store.ViewModels;
 
 namespace WebStore.Controllers
 {

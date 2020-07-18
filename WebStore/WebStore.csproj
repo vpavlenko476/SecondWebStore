@@ -37,6 +37,7 @@
     <ProjectReference Include="..\Store.Domain\Store.Domain.csproj" />
     <ProjectReference Include="..\Store.Entity\Store.Entities.csproj" />
     <ProjectReference Include="..\Store.Services\Store.Services.csproj" />
+    <ProjectReference Include="..\Store.ViewModels\Store.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

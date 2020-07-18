@@ -1,6 +1,7 @@
-﻿using Store.Entities.Abstract;
+﻿using Store.Domain;
+using Store.Entities.Abstract;
 
-namespace WebStore.ViewModels
+namespace Store.ViewModels
 {
 	public class ProductViewModel: INamedEntity, IOrderedEntity
 	{
@@ -9,5 +10,6 @@ namespace WebStore.ViewModels
 		public int Order { get; set; }
 		public string ImageUrl { get; set; }
 		public double Price { get; set; }
+		public Brand Brand { get; set; }
 	}
 }

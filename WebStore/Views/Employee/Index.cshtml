@@ -8,19 +8,27 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Сотрудник</th>
+                @if (User.IsInRole(Role.Administrator))
+                {
+                    <th></th>
+                    <th></th>
+                }
             </tr>
         </thead>
         <tbody>
             @foreach (var empolyee in Model)
             {
-                <tr>
-                    <th>@empolyee.Id</th>
-                    <td>
-                        @empolyee.Email
-                        <a asp-controller="Employee" asp-action="Details" asp-route-id="@empolyee.Id">Информация</a>
-                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@empolyee.Id">Редактировать</a>                        
+            <tr>
+                <th>@empolyee.Id</th>
+                <td>
+                    @empolyee.Email
+                    <a asp-controller="Employee" asp-action="Details" asp-route-id="@empolyee.Id">Информация</a>
+                    @if (User.IsInRole(Role.Administrator))
+                    {
+                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@empolyee.Id">Редактировать</a>
                         <a asp-controller="Employee" asp-action="Delete" asp-route-id="@empolyee.Id">Удалить</a>
-                    </td>
+                    }
+                </td>
                 </tr>
             }
         </tbody>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebStore.ViewModels.Identity
+namespace Store.ViewModels.Identity
 {
 	public class RegisterUserViewModel
 	{

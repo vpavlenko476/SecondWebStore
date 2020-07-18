@@ -1,5 +1,7 @@
 ﻿using Store.Entities;
 using System.Collections.Generic;
+using Store.Entities.Identity;
+using System;
 
 namespace Store.DAL.DataInit
 {
@@ -71,6 +73,11 @@ namespace Store.DAL.DataInit
 			new ProdctEntity { Id = 10, Name = "Женские джинсы", Price = 1025, ImageUrl = "product10.jpg", Order = 9, SectionId = 25, BrandId = 3 },
 			new ProdctEntity { Id = 11, Name = "Джинсы женские", Price = 1025, ImageUrl = "product11.jpg", Order = 10, SectionId = 25, BrandId = 3 },
 			new ProdctEntity { Id = 12, Name = "Летний костюм", Price = 1025, ImageUrl = "product12.jpg", Order = 11, SectionId = 25, BrandId = 3 },
+		};
+
+		public static List<BlogEntity> Blogs = new List<BlogEntity>()
+		{
+			new BlogEntity(){Author = new User() {UserName="TestUser"}, AddTime = DateTime.Now, Body="Полное описание новости", Topic="Тестовый заголовок" },
 		};
 	}
 }

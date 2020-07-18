@@ -1,0 +1,24 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/EshopTeamplate/css/site.css",
+    "inputFiles": [
+      "wwwroot/EshopTeamplate/css/main.css",
+      "wwwroot/EshopTeamplate/css/price-range.css",
+      "wwwroot/EshopTeamplate/css/prettyPhoto.css",
+      "wwwroot/EshopTeamplate/css/responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/EshopTeamplate/js/site.js",
+    "inputFiles": [
+      "wwwroot/EshopTeamplate/js/main.js",      
+      "wwwroot/EshopTeamplate/js/pricerange.css",
+      "wwwroot/EshopTeamplate/js/gmap.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true,
+      "gzip": true
+    }
+  }
+]

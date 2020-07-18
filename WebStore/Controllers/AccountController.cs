@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Entities.Identity;
 using System.Threading.Tasks;
-using WebStore.ViewModels.Identity;
+using Store.ViewModels.Identity;
 
 namespace WebStore.Controllers
 {
@@ -35,6 +35,7 @@ namespace WebStore.Controllers
 
 			if(registrationResult.Succeeded)
 			{
+				await _userManager.AddToRoleAsync(user, Role.User);
 				await _signInManager.SignInAsync(user, false);
 				return RedirectToAction("Index", "Home");
 			}
@@ -83,6 +84,6 @@ namespace WebStore.Controllers
 			await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home");
 		}
-		public IActionResult AccessDenied() => new StatusCodeResult(500);
+		public IActionResult AccessDenied() => View();
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using Store.Entities.Abstract;
 
-namespace WebStore.ViewModels
+namespace Store.ViewModels
 {
 	public class BrandViewModel : IOrderedEntity, INamedEntity
 	{

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
-namespace WebStore.ViewModels
+namespace Store.ViewModels
 {
 	public class EmployeeViewModel
 	{

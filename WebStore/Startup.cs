@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Store.DAL.DataInit;
 using Store.Entities.Identity;
 using Store.Services;
 using Store.Services.Abstract;
+using Store.Services.InCookies;
 using System;
 using WebStore.Infrastructure.Middleware;
 
@@ -66,9 +68,9 @@ namespace WebStore
 				opt.Cookie.HttpOnly = true;
 				opt.ExpireTimeSpan = TimeSpan.FromDays(10);
 
-				opt.LoginPath = "/Accaunt/Login";
-				opt.LogoutPath = "/Accaunt/Logout";
-				opt.AccessDeniedPath = "/Accaunt/AccessDenied";
+				opt.LoginPath = "/Account/Login";
+				opt.LogoutPath = "/Account/Logout";
+				opt.AccessDeniedPath = "/Account/AccessDenied";
 
 				//автоматическая смена идентификатора сессии при авторизации
 				opt.SlidingExpiration = true;
@@ -76,6 +78,7 @@ namespace WebStore
 
 			services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration["Data:Store:ConnectionString"]));
 			services.AddTransient<DataInitilizer>();
+			services.AddScoped<ICartService, CartService>();
 			services.AddScoped<StoreUnitOfWork>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
@@ -98,12 +101,12 @@ namespace WebStore
 			app.UseAuthentication();
 			app.UseAuthorization();
 			
-			app.Use(async (context, next) =>
-			{
-				//действие над контекстом до
-				await next();//вызов следйющего middleware
-				//действие над контекстом после
-			});
+			//app.Use(async (context, next) =>
+			//{
+			//	//действие над контекстом до
+			//	await next();//вызов следйющего middleware
+			//	//действие над контекстом после
+			//});
 			app.UseMiddleware<TestMiddleware>(); //использование кастомного middleware
 			app.UseEndpoints(endpoints =>
 			{

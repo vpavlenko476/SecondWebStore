@@ -7,6 +7,7 @@
 		public int Order { get; set; }
 		public int SectionId { get; set; }
 		public int? BrandId { get; set; }
+		public Brand Brand { get; set; }
 		public string ImageUrl { get; set; }
 		public double Price { get; set; }
 	}

@@ -18,5 +18,28 @@ namespace WebStore.Controllers
 
         public IActionResult Details() => View(_cartService.GetCartModel());
         
+        public IActionResult AddToCart(int id)
+        {
+            _cartService.AddToCart(id);
+            return RedirectToAction(nameof(Details));
+        }
+
+        public IActionResult DecrementFromCart(int id)
+        {
+            _cartService.DecrementFromCart(id);
+            return RedirectToAction(nameof(Details));
+        }
+
+        public IActionResult RemoveFromCart(int id)
+        {
+            _cartService.RemoveFromCart(id);
+            return RedirectToAction(nameof(Details));
+        }
+
+        public IActionResult Clear()
+        {
+            _cartService.Clear();
+            return RedirectToAction(nameof(Details));
+        }
     }
 }

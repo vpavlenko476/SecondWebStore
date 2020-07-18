@@ -13,6 +13,7 @@ using Store.DAL.DataInit;
 using Store.Entities.Identity;
 using Store.Services;
 using Store.Services.Abstract;
+using Store.Services.InCookies;
 using System;
 using WebStore.Infrastructure.Middleware;
 

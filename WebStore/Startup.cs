@@ -114,6 +114,13 @@ namespace WebStore
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapAreaControllerRoute(
+					name: "areas ",
+					areaName: "Admin",
+					pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+			});
 		}
 	}
 }

@@ -33,11 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Store.DAL\Store.DAL.csproj" />
-    <ProjectReference Include="..\Store.Domain\Store.Domain.csproj" />
-    <ProjectReference Include="..\Store.Entity\Store.Entities.csproj" />
-    <ProjectReference Include="..\Store.Services\Store.Services.csproj" />
-    <ProjectReference Include="..\Store.ViewModels\Store.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Common\Store.Domain\Store.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\Store.Entity\Store.Entities.csproj" />
+    <ProjectReference Include="..\..\Common\Store.ViewModels\Store.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Services\Store.DAL\Store.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\Store.Services\Store.Services.csproj" />  
   </ItemGroup>
 
   <ItemGroup>

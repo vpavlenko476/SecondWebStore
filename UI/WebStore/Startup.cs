@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Store.Clients;
 using Store.DAL;
 using Store.DAL.Context;
 using Store.DAL.DataInit;
@@ -14,6 +15,7 @@ using Store.Entities.Identity;
 using Store.Services;
 using Store.Services.Abstract;
 using Store.Services.InCookies;
+using Store.ServicesHosting.Abstract;
 using System;
 using WebStore.Infrastructure.Middleware;
 
@@ -80,6 +82,7 @@ namespace WebStore
 			services.AddTransient<DataInitilizer>();
 			services.AddScoped<ICartService, CartService>();
 			services.AddScoped<StoreUnitOfWork>();
+			services.AddTransient<IValueService, ValueClient>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
 			services.AddTransient<IEmployeeService, EmployeeService>();

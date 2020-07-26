@@ -1,5 +1,6 @@
 ﻿@inject IProductService ProductService
 @inject IMapper _mapper
+@model IEnumerable<string>
 @{
     var products = ProductService.GetProducts(null, null, null).Take(6).Select(p => _mapper.Map<ProductViewModel>(p));
 }
@@ -7,6 +8,10 @@
 <section>
     <div class="container">
         <div class="row">
+            @foreach(var item in Model)
+            {
+                <p>@item</p>
+            }
             <partial name="Partial/_LeftSideBar" />
 
             <div class="col-sm-9 padding-right">

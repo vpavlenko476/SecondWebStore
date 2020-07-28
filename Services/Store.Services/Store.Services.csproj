@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Store.Domain\Store.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\Store.ViewModels\Store.ViewModels.csproj" />
     <ProjectReference Include="..\Store.DAL\Store.DAL.csproj" />
-    <ProjectReference Include="..\Store.Domain\Store.Domain.csproj" />
-    <ProjectReference Include="..\Store.ViewModels\Store.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

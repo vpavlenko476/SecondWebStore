@@ -3,18 +3,21 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Store.Entities;
 using Store.Entities.Identity;
+using Store.Entities.Order;
 
 namespace Store.DAL.Context
 {
-	public class StoreContext: IdentityDbContext<User, Role, string>
+	public class StoreContext : IdentityDbContext<User, Role, string>
 	{
-		internal StoreContext() {}
+		internal StoreContext() { }
 		public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }
 		public DbSet<EmployeeEntity> Employees { get; set; }
 		public DbSet<SectionEntity> Sections { get; set; }
 		public DbSet<BrandEntity> Brands { get; set; }
 		public DbSet<ProdctEntity> Products { get; set; }
 		public DbSet<BlogEntity> Blogs { get; set; }
+		public DbSet<OrderEntity> Orders { get; set; }
+		public DbSet<OrderItemEntity> OrderItems { get;set;}
 
 		/// <summary>
 		/// Выполняется если вызван конструктор без параметров

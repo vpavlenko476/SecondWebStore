@@ -14,6 +14,10 @@ namespace WebStore.Profiles
             CreateMap<EmployeeViewModel, Employee>();
             CreateMap<Employee, EmployeeViewModel>();
             CreateMap<ProdctEntity, Product>();
+            CreateMap<OrderEntity, Order>();
+            CreateMap<Order, OrderEntity>();
+            CreateMap<OrderViewModel, Order>();
+            CreateMap<Order, OrderViewModel>();
             CreateMap<BrandEntity, Brand>();
             CreateMap<Brand, BrandEntity>();
             CreateMap<Product, ProdctEntity>();

@@ -83,6 +83,7 @@ namespace WebStore
 			services.AddScoped<ICartService, CartService>();
 			services.AddScoped<StoreUnitOfWork>();
 			services.AddTransient<IValueService, ValueClient>();
+			services.AddTransient<IOrderService, OrderService>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
 			services.AddTransient<IEmployeeService, EmployeeService>();

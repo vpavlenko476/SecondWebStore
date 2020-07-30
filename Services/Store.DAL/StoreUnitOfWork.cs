@@ -15,6 +15,7 @@ namespace Store.DAL
 		private IBaseRepo<BrandEntity> _brandRepo;
 		private IBaseRepo<ProdctEntity> _productRepo;
 		private IBaseRepo<BlogEntity> _blogRepo;
+		private IBaseRepo<OrderEntity> _orderRepo;
 		public StoreUnitOfWork(StoreContext storeContext)
 		{
 			_storeContext = storeContext;			
@@ -53,6 +54,14 @@ namespace Store.DAL
 			get
 			{
 				return _blogRepo ?? new BaseRepo<BlogEntity>(_storeContext);
+			}
+		}
+
+		public IBaseRepo<OrderEntity> OrderRepository
+		{
+			get
+			{
+				return _orderRepo ?? new BaseRepo<OrderEntity>(_storeContext);
 			}
 		}
 

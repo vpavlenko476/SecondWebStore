@@ -1,8 +1,9 @@
-﻿@model CartViewModel
-@{ 
+﻿@model CartOrderViewModel
+@{
     ViewData["Title"] = "Корзина";
 }
 
+<section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
@@ -23,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Items)
+                    @foreach (var item in Model.Cart.Items)
                     {
                         <tr>
                             <td class="cart_product">
@@ -38,30 +39,39 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <a 
-                                       asp-controller="Cart" 
-                                       asp-action="AddToCart" 
+                                    <a asp-controller="Cart"
+                                       asp-action="AddToCart"
                                        asp-route-id="@item.productVM.Id"> + </a>
                                     <input class="cart_quantity_input" type="text" name="quantity" value="@item.Count" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" 
-                                       asp-controller="Cart" 
-                                       asp-action="DecrementFromCart" 
+                                    <a class="cart_quantity_down"
+                                       asp-controller="Cart"
+                                       asp-action="DecrementFromCart"
                                        asp-route-id="@item.productVM.Id"> - </a>
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">@((item.productVM.Price*item.Count).ToString())</p>
+                                <p class="cart_total_price">@((item.productVM.Price * item.Count).ToString())</p>
                             </td>
                             <td class="cart_delete">
-                                <a  
-                                   asp-controller="Cart" 
-                                   asp-action="RemoveFromCart" 
-                                   asp-route-id="@item.productVM.Id" 
+                                <a asp-controller="Cart"
+                                   asp-action="RemoveFromCart"
+                                   asp-route-id="@item.productVM.Id"
                                    class="cart_quantity_delete"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
-                    }                  
+                    }
                 </tbody>
             </table>
         </div>
     </div>
+</section>
+<section id="do_action">
+    <div class="container">
+        <div class="heading">
+            <h3>Что бы Вы хотели сделать далее?</h3>
+            <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+        </div>
+
+        <partial name="Partial/_CheckOut" model="@Model.Order" view-data="@(new ViewDataDictionary(ViewData) { { "TotalPrice", Model.Cart.TotalPrice } })" />
+    </div>
+</section><!--/#do_action-->

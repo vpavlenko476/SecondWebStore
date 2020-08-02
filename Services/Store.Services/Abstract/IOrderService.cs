@@ -10,6 +10,6 @@ namespace Store.Services.Abstract
 	{
 		Task<IEnumerable<Order>> GetOrders(string userName);
 		Task<Order> GetOrderById(int id);
-		Task<Order> CreateOrder(string userName, CartViewModel cart, OrderViewModel order)
+		Task<Order> CreateOrder(string userName, CartViewModel cart, OrderViewModel order);
 	}
 }

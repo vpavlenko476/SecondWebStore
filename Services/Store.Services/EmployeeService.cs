@@ -4,6 +4,8 @@ using Store.DAL.Contracts;
 using Store.Domain;
 using Store.Entities;
 using Store.Services.Abstract;
+using Store.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,7 +45,7 @@ namespace Store.Services
 
 		public IEnumerable<Employee> GetAll()
 		{
-			return _unitOfWork.EmployeeRepository.GetAll().Select(_mapper.Map<Employee>);
-		}
+			return _mapper.Map<IEnumerable<Employee>>(_unitOfWork.EmployeeRepository.GetAll().ToList());
+		}				
 	}
 }

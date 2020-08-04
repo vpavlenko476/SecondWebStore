@@ -86,7 +86,7 @@ namespace WebStore
 			services.AddTransient<IOrderService, OrderService>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
-			services.AddTransient<IEmployeeService, EmployeeService>();
+			services.AddTransient<IEmployeeService, EmployeesClient>();
 		}
 
 		//настройка конвейера middleware

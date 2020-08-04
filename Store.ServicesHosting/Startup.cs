@@ -20,6 +20,7 @@ using Store.Services.Abstract;
 using Store.Services.InCookies;
 using Store.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Store.Clients;
 
 namespace Store.ServicesHosting
 {

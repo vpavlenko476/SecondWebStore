@@ -11,8 +11,7 @@ namespace Store.ViewModels
 
 		[Display(Name = "Имя")]
 		[Required(ErrorMessage = "Введите Имя")]
-		[StringLength(200, MinimumLength = 3, ErrorMessage = "Длина Имени должна быть от 3 до 200 символов")]
-		[RegularExpression(@"[А-ЯЁ][а-яё]", ErrorMessage = "Ошибка формата имени")]
+		[StringLength(200, MinimumLength = 3, ErrorMessage = "Длина Имени должна быть от 3 до 200 символов")]		
 		public string Name { get; set; }
 
 		[Display(Name = "Фамилия")]

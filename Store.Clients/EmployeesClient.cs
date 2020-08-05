@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Store.Clients
 {
-	public class EmployeesClient: BaseClient, IEmployeeService
+	public class EmployeesClient : BaseClient, IEmployeeService
 	{
 		protected override string ServiceAddress { get; } = "api/employees";
-		public EmployeesClient(IConfiguration configuration): base(configuration)
+		public EmployeesClient(IConfiguration configuration) : base(configuration)
 		{
 
 		}
-		
+
 		public IEnumerable<Employee> GetAll()
 		{
 			return Get<List<Employee>>(ServiceAddress);
@@ -24,7 +24,7 @@ namespace Store.Clients
 
 		public Task Edit(Employee employee)
 		{
-			 return PutAsync(ServiceAddress, employee);			
+			return PutAsync(ServiceAddress, employee);
 		}
 
 		public Task Delete(int employeeId)
@@ -40,7 +40,7 @@ namespace Store.Clients
 
 		public Task<Employee> GetById(int id)
 		{
-			return GetAsync<Employee>($"{ServiceAddress}/{id}");			
+			return GetAsync<Employee>($"{ServiceAddress}/{id}");
 		}
 	}
 }

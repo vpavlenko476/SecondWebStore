@@ -26,7 +26,7 @@ namespace Store.Clients
 
 		public Task<Product> GetProductByIdAsync(int id)
 		{
-			return GetAsync<Product>($"{ServiceAddress}/id");
+			return GetAsync<Product>($"{ServiceAddress}/{id}");
 		}
 	}
 }

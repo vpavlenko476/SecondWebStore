@@ -29,23 +29,24 @@ namespace Store.Services
 			_mapper = mapper;
 			_storeContext = storeContext;
 			_productService = productService;
+			_userManager = userManager;
 		}
 
-		public async Task<Order> CreateOrder(string userName, CartViewModel cart, OrderViewModel orderVM)
+		public async Task<Order> CreateOrder(CartOrderViewModel cartOrderViewModel)
 		{
-			var user = await _userManager.FindByNameAsync(userName);
-			if (user is null) throw new InvalidOperationException($"Пользователь {userName} не найден");
+			var user = await _userManager.FindByNameAsync(cartOrderViewModel.UserName);
+			if (user is null) throw new InvalidOperationException($"Пользователь {cartOrderViewModel.UserName} не найден");
 
 			await using var transaction = await _storeContext.Database.BeginTransactionAsync();
 			var order = new Order
 			{
-				Address = orderVM.Address,
-				Phone = orderVM.Phone,
+				Address = cartOrderViewModel.Order.Address,
+				Phone = cartOrderViewModel.Order.Phone,
 				User = user,
 				Date = DateTime.Now
 			};
 
-			foreach(var (product, quantity) in cart.Items)
+			foreach(var (product, quantity) in cartOrderViewModel.Cart.Items)
 			{
 				var prod = await _productService.GetProductByIdAsync(product.Id);
 				if (prod is null) continue;

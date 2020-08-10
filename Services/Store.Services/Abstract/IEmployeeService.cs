@@ -1,5 +1,7 @@
 ﻿using Store.Domain;
+using Store.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Store.Services.Abstract
@@ -32,6 +34,6 @@ namespace Store.Services.Abstract
 		/// <summary>
 		/// Получить сотрудника по его идентификатору
 		/// </summary>		
-		Task<Employee> GetById(int id);
+		Task<Employee> GetById(int id);		
 	}
 }

@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Services\Store.Services\Store.Services.csproj" />
-    <ProjectReference Include="..\Store.ServicesHosting\Store.ServicesHosting.csproj" />
   </ItemGroup>
 
 </Project>

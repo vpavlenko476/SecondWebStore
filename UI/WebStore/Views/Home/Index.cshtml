@@ -2,7 +2,7 @@
 @inject IMapper _mapper
 @model IEnumerable<string>
 @{
-    var products = ProductService.GetProducts(null, null, null).Take(6).Select(p => _mapper.Map<ProductViewModel>(p));
+    var products = ProductService.GetProducts(new ProductFilter { SectionId = null, BrandId = null, Ids = null}).Take(6).Select(p => _mapper.Map<ProductViewModel>(p));
 }
 <partial name="Partial/_Slider" />
 <section>

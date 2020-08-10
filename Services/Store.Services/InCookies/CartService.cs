@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Store.Domain;
 using Store.Domain.CartModel;
 using Store.Services.Abstract;
 using Store.ViewModels;
@@ -88,7 +89,7 @@ namespace Store.Services.InCookies
 
 		public CartViewModel GetCartModel()
 		{
-			var product = _productService.GetProducts(null, null, cart.Items.Select(i=>i.ProductId).ToArray());
+			var product = _productService.GetProducts(new ProductFilter() { SectionId = null, BrandId = null, Ids = cart.Items.Select(i => i.ProductId).ToArray() });
 			var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(product).ToDictionary(p => p.Id);
 			return new CartViewModel()
 			{

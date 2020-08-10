@@ -26,25 +26,24 @@ namespace Store.Services
 			return ptoduct;
 		}
 
-		public IEnumerable<Product> GetProducts(int? sectionId = null, int? brandId = null, int[] Ids = null)
+		public IEnumerable<Product> GetProducts(ProductFilter filter)
 		{
 			var products = _unitOfWork.ProductRepository.GetAll();
-			if (Ids != null && Ids.Any())
+			if (filter.Ids != null && filter.Ids.Any())
 			{
-				return _mapper.Map<List<Product>>(products.Where(p => Ids.Contains(p.Id)));
+				return _mapper.Map<List<Product>>(products.Where(p => filter.Ids.Contains(p.Id)));
 			}
 			else
 			{
-				if (sectionId != null)
+				if (filter.SectionId != null)
 				{
-					return _mapper.Map<List<Product>>(products.Where(p => p.SectionId == sectionId));
+					return _mapper.Map<List<Product>>(products.Where(p => p.SectionId == filter.SectionId));
 				}
-				if (brandId != null)
+				if (filter.BrandId != null)
 				{
-					return _mapper.Map<List<Product>>(products.Where(p => p.BrandId == brandId));
+					return _mapper.Map<List<Product>>(products.Where(p => p.BrandId == filter.BrandId));
 				}
-			}		
-			
+			}
 			return _mapper.Map<List<Product>>(products);
 		}
 	}

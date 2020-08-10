@@ -3,7 +3,7 @@ using Store.Domain;
 using Store.Entities;
 using Store.ViewModels;
 
-namespace WebStore.Profiles
+namespace Store.ServicesHosting.Profiles
 {
     public class LeadProfile : Profile
     {

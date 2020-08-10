@@ -4,6 +4,7 @@ using Store.Services.Abstract;
 using System.Linq;
 using System.Threading.Tasks;
 using Store.ViewModels;
+using Store.Domain;
 
 namespace WebStore.Controllers
 {
@@ -18,7 +19,7 @@ namespace WebStore.Controllers
 		}
 		public IActionResult Shop(int? sectionId, int? brandId)
 		{
-			var products = _productService.GetProducts(sectionId, brandId, null);
+			var products = _productService.GetProducts(new ProductFilter() { SectionId = sectionId, BrandId = brandId, Ids = null });
 			return View(new CatalogViewModel()
 			{
 				SectionId = sectionId,

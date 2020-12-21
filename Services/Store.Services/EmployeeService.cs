@@ -24,7 +24,7 @@ namespace Store.Services
 
 		public async Task Delete(int employeeId)
 		{
-			var empToDelete = _unitOfWork.EmployeeRepository.GetAll().Where(e => e.Id == employeeId).Single();
+			var empToDelete = _unitOfWork.EmployeeRepository.GetAll().Single(e => e.Id == employeeId);
 			await _unitOfWork.EmployeeRepository.Delete(empToDelete);
 		}
 

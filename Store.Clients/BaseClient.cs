@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 
 namespace Store.Clients
 {
-	public abstract class BaseClient
-	{
-		/// <summary>
-		/// Http клиент
-		/// </summary>
-		public HttpClient HttpClient { get; set; }
+    public abstract class BaseClient
+    {
+        /// <summary>
+        /// Http клиент
+        /// </summary>
+        public HttpClient HttpClient { get; private set; }
 
-		/// <summary>
-		/// Адрес сервиса
-		/// </summary>
-		protected abstract string ServiceAddress { get; }
-		public BaseClient(IConfiguration configuration)
-		{
-			HttpClient = new HttpClient()
-			{
-				BaseAddress = new Uri(configuration["ClientAddress"])
-			};
-			HttpClient.DefaultRequestHeaders.Accept.Clear();
-			HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-		}
+        /// <summary>
+        /// Адрес сервиса
+        /// </summary>
+        protected abstract string ServiceAddress { get; }
+
+        public BaseClient(IConfiguration configuration)
+        {
+            HttpClient = new HttpClient()
+            {
+                BaseAddress = new Uri(configuration["ClientAddress"]),
+            };
+            HttpClient.DefaultRequestHeaders.Accept.Clear();
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
 
         protected T Get<T>(string url) where T : new()
         {
@@ -48,7 +49,7 @@ namespace Store.Clients
 
         protected async Task<HttpResponseMessage> PostAsync<T>(string url, T value)
         {
-            var response = await HttpClient.PostAsJsonAsync(url, value);           
+            var response = await HttpClient.PostAsJsonAsync(url, value);
             return response;
         }
 
@@ -59,7 +60,7 @@ namespace Store.Clients
 
         protected async Task<HttpResponseMessage> PutAsync<T>(string url, T value)
         {
-            var response = await HttpClient.PutAsJsonAsync(url, value);          
+            var response = await HttpClient.PutAsJsonAsync(url, value);
             return response;
         }
 
@@ -70,7 +71,8 @@ namespace Store.Clients
 
         protected async Task<HttpResponseMessage> DeleteAsync(string url)
         {
-            return await HttpClient.DeleteAsync(url); ;
+            return await HttpClient.DeleteAsync(url);
+            ;
         }
     }
 }

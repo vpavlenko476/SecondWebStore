@@ -32,17 +32,17 @@ namespace WebStore
 		{
 			services.AddControllersWithViews(opt =>
 			{
-				//opt.Filters.Add<Filter>(); добавление фильтров				
-				//opt.Conventions.Add() добавление соглашений
+				//opt.Filters.Add<Filter>(); РґРѕР±Р°РІР»РµРЅРёРµ С„РёР»СЊС‚СЂРѕРІ				
+				//opt.Conventions.Add() РґРѕР±Р°РІР»РµРЅРёРµ СЃРѕРіР»Р°С€РµРЅРёР№
 			}
 				).AddRazorRuntimeCompilation();
 			
-			//добавляем систему Identity
+			//РґРѕР±Р°РІР»СЏРµРј СЃРёСЃС‚РµРјСѓ Identity
 			services.AddIdentity<User, Role>()
 				.AddEntityFrameworkStores<StoreContext>()
 				.AddDefaultTokenProviders();
 
-			//конфигурация Identity
+			//РєРѕРЅС„РёРіСѓСЂР°С†РёСЏ Identity
 			services.Configure<IdentityOptions>(opt =>
 			{
 #if DEBUG
@@ -56,14 +56,14 @@ namespace WebStore
 #endif
 				opt.User.RequireUniqueEmail = false;
 
-				//все новые пользователи должны быть разблокированы
+				//РІСЃРµ РЅРѕРІС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СЂР°Р·Р±Р»РѕРєРёСЂРѕРІР°РЅС‹
 				opt.Lockout.AllowedForNewUsers = true;
 				opt.Lockout.MaxFailedAccessAttempts = 10;
 				opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
 
 			});
 
-			//настройка cookie для Identity
+			//РЅР°СЃС‚СЂРѕР№РєР° cookie РґР»СЏ Identity
 			services.ConfigureApplicationCookie(opt =>
 			{
 				opt.Cookie.Name = "WebStorePerProj";
@@ -74,7 +74,7 @@ namespace WebStore
 				opt.LogoutPath = "/Account/Logout";
 				opt.AccessDeniedPath = "/Account/AccessDenied";
 
-				//автоматическая смена идентификатора сессии при авторизации
+				//Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ СЃРјРµРЅР° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР° СЃРµСЃСЃРёРё РїСЂРё Р°РІС‚РѕСЂРёР·Р°С†РёРё
 				opt.SlidingExpiration = true;
 			});
 
@@ -89,7 +89,7 @@ namespace WebStore
 			services.AddTransient<IEmployeeService, EmployeesClient>();
 		}
 
-		//настройка конвейера middleware
+		//РЅР°СЃС‚СЂРѕР№РєР° РєРѕРЅРІРµР№РµСЂР° middleware
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataInitilizer dbInit)
 		{
 			dbInit.InitData();
@@ -107,11 +107,11 @@ namespace WebStore
 			
 			//app.Use(async (context, next) =>
 			//{
-			//	//действие над контекстом до
-			//	await next();//вызов следйющего middleware
-			//	//действие над контекстом после
+			//	//РґРµР№СЃС‚РІРёРµ РЅР°Рґ РєРѕРЅС‚РµРєСЃС‚РѕРј РґРѕ
+			//	await next();//РІС‹Р·РѕРІ СЃР»РµРґР№СЋС‰РµРіРѕ middleware
+			//	//РґРµР№СЃС‚РІРёРµ РЅР°Рґ РєРѕРЅС‚РµРєСЃС‚РѕРј РїРѕСЃР»Рµ
 			//});
-			app.UseMiddleware<TestMiddleware>(); //использование кастомного middleware
+			app.UseMiddleware<TestMiddleware>(); //РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РєР°СЃС‚РѕРјРЅРѕРіРѕ middleware
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllerRoute(

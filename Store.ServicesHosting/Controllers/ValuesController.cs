@@ -1,41 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Store.ServicesHosting.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/values")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private static readonly List<string> NumArray = Enumerable.Range(1, 10).Select(i => $"value {i}").ToList();
 
-        // GET api/values/5
+        [HttpGet]
+        public List<string> Get() => NumArray;
+
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value " + id;
+            if (id < 0)
+                return BadRequest();
+            if (id > NumArray.Count())
+                return NotFound();
+            return NumArray[id];
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        public void Post([FromBody] string value) => NumArray.Add(value);
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] string value)
         {
+            if (id < 0)
+                return BadRequest();
+            if (id > NumArray.Count())
+                return NotFound();
+            NumArray[id] = value;
+            return Ok();
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            if (id < 0)
+                return BadRequest();
+            if (id > NumArray.Count())
+                return NotFound();
+            NumArray.RemoveAt(id);
+            return Ok();
         }
     }
 }

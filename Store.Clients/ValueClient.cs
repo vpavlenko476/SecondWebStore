@@ -16,38 +16,10 @@ namespace Store.Clients
 		}
 		protected override string ServiceAddress { get; }
 
-		public HttpStatusCode Delete(int id)
-		{
-			var response = HttpClient.DeleteAsync($"{ServiceAddress}/delete/{id}").Result;
-			return response.StatusCode;
-		}
-
 		public async Task<HttpStatusCode> DeleteAsync(int id)
 		{
 			var response = await HttpClient.DeleteAsync($"{ServiceAddress}/delete/{id}");
 			return response.StatusCode;
-		}
-
-		public IEnumerable<string> Get()
-		{
-			var list = new List<string>();
-			var response = HttpClient.GetAsync($"{ServiceAddress}").Result;
-			if(response.IsSuccessStatusCode)
-			{
-				list = response.Content.ReadAsAsync<List<string>>().Result;
-			}
-			return list;
-		}
-
-		public string Get(int id)
-		{
-			var result = string.Empty;
-			var response = HttpClient.GetAsync($"{ServiceAddress}/get/{id}").Result;
-			if (response.IsSuccessStatusCode)
-			{
-				result = response.Content.ReadAsAsync<string>().Result;
-			}
-			return result;
 		}
 
 		public async Task<IEnumerable<string>> GetAsync()
@@ -71,25 +43,17 @@ namespace Store.Clients
 			}
 			return result;
 		}
-
-		public Uri Post(string value)
+		
+		public async Task<Uri> PostAsync(string value)
 		{
-			throw new NotImplementedException();
+			var response = HttpClient.PostAsJsonAsync(ServiceAddress, value).Result;
+			return response.EnsureSuccessStatusCode().Headers.Location;
 		}
-
-		public Task<Uri> PostAsync(string value)
+		
+		public async Task<HttpStatusCode> PutAsync(int id, string value)
 		{
-			throw new NotImplementedException();
-		}
-
-		public HttpStatusCode Put(int id, string value)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<HttpStatusCode> PutAsync(int id, string value)
-		{
-			throw new NotImplementedException();
+			var response = HttpClient.PutAsJsonAsync($"{ServiceAddress}/{id}", value).Result;
+			return response.EnsureSuccessStatusCode().StatusCode;
 		}
 	}
 }

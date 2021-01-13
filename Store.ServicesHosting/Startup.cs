@@ -24,15 +24,8 @@ using Store.Clients;
 
 namespace Store.ServicesHosting
 {
-	public class Startup
+	public sealed record Startup(IConfiguration Configuration)
 	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
-
-		public IConfiguration Configuration { get; }
-
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
@@ -87,6 +80,7 @@ namespace Store.ServicesHosting
 			services.AddScoped<IProductService, ProductService>();
 			services.AddAutoMapper(typeof(Startup));
 			services.AddTransient<IEmployeeService, EmployeeService>();
+			services.AddSwaggerGen();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,6 +96,11 @@ namespace Store.ServicesHosting
 			app.UseRouting();
 
 			app.UseAuthorization();
+			app.UseSwagger();
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+			});
 
 			app.UseEndpoints(endpoints =>
 			{

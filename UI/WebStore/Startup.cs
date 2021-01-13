@@ -21,13 +21,8 @@ using WebStore.Infrastructure.Middleware;
 
 namespace WebStore
 {
-	public class Startup
+	public sealed record Startup(IConfiguration Configuration)
 	{
-		public IConfiguration Configuration { get; set; }
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews(opt =>
@@ -46,6 +41,8 @@ namespace WebStore
 			services.Configure<IdentityOptions>(opt =>
 			{
 #if DEBUG
+				
+				
 				opt.Password.RequiredLength = 4;
 				opt.Password.RequireDigit = false;
 				opt.Password.RequireLowercase = false;
